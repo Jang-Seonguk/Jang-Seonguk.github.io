@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
+  <link href="https://jang-seonguk.github.io/author/jang-seonguk/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="https://jang-seonguk.github.io/" rel="alternate" type="text/html" />
+  <updated>2021-01-13T23:31:12+09:00</updated>
+  <id>https://jang-seonguk.github.io/author/jang-seonguk/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">IT Technical Training | </title>
+  
+
+  
+    <subtitle>IT기반기술교육 블로그</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">Python 강좌(1) - Python 기본</title>
+      <link href="https://jang-seonguk.github.io/python-basic" rel="alternate" type="text/html" title="Python 강좌(1) - Python 기본" />
+      <published>2020-09-28T01:40:00+09:00</published>
+      <updated>2020-09-28T01:40:00+09:00</updated>
+      <id>https://jang-seonguk.github.io/python-basic</id>
+      <content type="html" xml:base="https://jang-seonguk.github.io/python-basic">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;Python 강좌는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;./python-basic&quot;&gt;Python 강좌(1) - Python 기본&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;./python-control-statement&quot;&gt;Python 강좌(2) - Python 제어문&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이 글은 python baisc 입니다.!!
+ggggg&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;syntaxHighlight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello World'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>jang-seonguk</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="python" />
+      
+
+      
+        <summary type="html">Python 강좌는 여러 절로 구성되어 있습니다. Python 강좌(1) - Python 기본 Python 강좌(2) - Python 제어문</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Python 강좌(2) - Python 제어문</title>
+      <link href="https://jang-seonguk.github.io/python-control-statement" rel="alternate" type="text/html" title="Python 강좌(2) - Python 제어문" />
+      <published>2020-09-28T01:40:00+09:00</published>
+      <updated>2020-09-28T01:40:00+09:00</updated>
+      <id>https://jang-seonguk.github.io/python-control-statement</id>
+      <content type="html" xml:base="https://jang-seonguk.github.io/python-control-statement">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;Python 강좌는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;./python-basic&quot;&gt;Python 강좌(1) - Python 기본&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;./python-control-statement&quot;&gt;Python 강좌(2) - Python 제어문&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이 글은 python의 제어문에 관한 내용입니다.&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;class Stack :
+    def __init__(self):
+        self.top = []
+
+    def isEmpty(self):
+        return len(self.top) == 0
+
+    def size(self):
+        return len(self.top)
+
+    def clear(self):
+        self.top = []
+
+    def push(self, item):
+        self.top.append(item)
+
+    def pop(self):
+        if not self.isEmpty():
+            return self.top.pop(-1)
+
+    def peek(self):
+        if not self.isEmpty():
+            return self.top[-1]
+
+    def __str__(self):
+        return str(self.top)
+
+
+def checkBrackets(statement):
+    stack = Stack()
+    for ch in statement:
+        if ch in (&amp;#39;{&amp;#39;, &amp;#39;[&amp;#39;, &amp;#39;(&amp;#39;):
+            stack.push(ch)
+        elif ch in (&amp;#39;}&amp;#39;, &amp;#39;]&amp;#39;, &amp;#39;)&amp;#39;):
+            if stack.isEmpty():
+                return False
+            else:
+                left = stack.pop()
+                if (ch == &amp;quot;}&amp;quot; and left != &amp;quot;{&amp;quot; or
+                    ch == &amp;quot;]&amp;quot; and left != &amp;quot;[&amp;quot; or
+                    ch == &amp;quot;)&amp;quot; and left != &amp;quot;(&amp;quot;):
+                    return False
+
+    return stack.isEmpty()
+
+
+
+def evealPostfix(expr):
+    s = Stack()
+    for token in expr:
+        if token in expr:
+            if token in &amp;quot;+-*/&amp;quot;:
+                val2 = s.pop()
+                val1 = s.pop()
+                if (token == &amp;#39;+&amp;#39;):
+                    s.push(val1 + val2)
+                elif (token == &amp;#39;-&amp;#39;):
+                    s.push(val1 - val2)
+                elif (token == &amp;#39;*&amp;#39;):
+                    s.push(val1 * val2)
+                elif (token == &amp;#39;/&amp;#39;):
+                    s.push(val1 / val2)
+            else:
+                s.push(float(token))
+    return s.pop()
+
+
+def precedence(op):
+    if op == &amp;#39;(&amp;#39; or op == &amp;#39;)&amp;#39;:
+        return 0
+    elif op == &amp;#39;+&amp;#39; or op == &amp;#39;-&amp;#39;:
+        return 1
+    elif op == &amp;#39;*&amp;#39; or op == &amp;#39;/&amp;#39;:
+        return 2
+    else:
+        return -1
+
+def Infix2Postfix(expr):
+    s = Stack()
+    output = []
+    for term in expr:
+        if term in &amp;#39;(&amp;#39;:
+            s.push(&amp;#39;(&amp;#39;)
+        elif term in &amp;#39;)&amp;#39;:
+            while not s.isEmpty():
+                op = s.pop()
+                if op == &amp;#39;(&amp;#39;:
+                    break
+                else:
+                    output.append(op)
+        elif term in &amp;quot;+-*/&amp;quot;:
+            while not s.isEmpty():
+                op = s.peek()
+                if (precedence(term) &amp;lt;= precedence(op)):
+                    output.append(op)
+                    s.pop()
+                else:
+                    break
+            s.push(term)
+        else:
+            output.append(term)
+
+    while not s.isEmpty():
+        output.append(s.pop())
+
+    return output
+
+
+map = [[&amp;#39;1&amp;#39;,&amp;#39;1&amp;#39;,&amp;#39;1&amp;#39;,&amp;#39;1&amp;#39;,&amp;#39;1&amp;#39;,&amp;#39;1&amp;#39;],
+       [&amp;#39;e&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;1&amp;#39;],
+       [&amp;#39;1&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;1&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;1&amp;#39;,&amp;#39;1&amp;#39;],
+       [&amp;#39;1&amp;#39;,&amp;#39;1&amp;#39;,&amp;#39;1&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;x&amp;#39;],
+       [&amp;#39;1&amp;#39;,&amp;#39;1&amp;#39;,&amp;#39;1&amp;#39;,&amp;#39;0&amp;#39;,&amp;#39;1&amp;#39;,&amp;#39;1&amp;#39;],
+       [&amp;#39;1&amp;#39;,&amp;#39;1&amp;#39;,&amp;#39;1&amp;#39;,&amp;#39;1&amp;#39;,&amp;#39;1&amp;#39;,&amp;#39;1&amp;#39;]]
+MAZE_SIZE = 6
+def isValidpos(x, y):
+    if x &amp;lt; 0 or y &amp;lt; 0 or x &amp;gt;= MAZE_SIZE or y &amp;gt;= MAZE_SIZE:
+        return False
+    else:
+        return map[y][x] == &amp;#39;0&amp;#39; or map[y][x] == &amp;#39;x&amp;#39;
+
+def DFS():
+    stack = Stack()
+    stack.push((0,1))
+    print(&amp;#39;DFS: &amp;#39;)
+
+    while not stack.isEmpty():
+        here = stack.pop()
+        print(here, end = &amp;#39;-&amp;gt;&amp;#39;)
+        (x,y) = here
+        if (map[y][x] == &amp;#39;x&amp;#39;):
+            return True
+        else:
+            map[y][x] = &amp;#39;.&amp;#39;
+
+            if isValidpos(x, y-1):
+                stack.push((x, y-1))
+            if isValidpos(x, y+1):
+                stack.push((x, y+1))
+            if isValidpos(x-1, y):
+                stack.push((x-1, y))
+            if isValidpos(x+1, y):
+                stack.push((x+1, y))
+        print(&amp;#39; 현재 스택 : &amp;#39;, stack)
+    return False&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/Jang-Seonguk/48b03412f6a91fad684820741d246326.js&quot;&gt; &lt;/script&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>jang-seonguk</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="python" />
+      
+
+      
+        <summary type="html">Python 강좌는 여러 절로 구성되어 있습니다. Python 강좌(1) - Python 기본 Python 강좌(2) - Python 제어문</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Data_Structure - Stack</title>
+      <link href="https://jang-seonguk.github.io/stack" rel="alternate" type="text/html" title="Data_Structure - Stack" />
+      <published>2020-09-28T01:40:00+09:00</published>
+      <updated>2020-09-28T01:40:00+09:00</updated>
+      <id>https://jang-seonguk.github.io/stack</id>
+      <content type="html" xml:base="https://jang-seonguk.github.io/stack">&lt;ol&gt;
+  &lt;li&gt;
+    &lt;h2 id=&quot;스택stack&quot;&gt;스택(Stack)&lt;/h2&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;1.1 스택이란?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;스택은 후입선출(Last-In First Out: LIFO)의 자료구조이다.&lt;/p&gt;
+
+&lt;p&gt;스택의 기능에는&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Stack() : 비어 있는 새로운 스택을 만든다.&lt;/li&gt;
+  &lt;li&gt;isEmpty() : 스택이 비어있으면 True를 아니면 False를 반환한다.&lt;/li&gt;
+  &lt;li&gt;push(e) : 항목 e를 스택의 맨 위에 추가한다.&lt;/li&gt;
+  &lt;li&gt;pop() : 스택의 맨 위에 있는 항목을 꺼내 반환한다.&lt;/li&gt;
+  &lt;li&gt;peek() : 스택의 맨 위에 있는 항목을 삭제하지 않고 반환한다.&lt;/li&gt;
+  &lt;li&gt;size() : 스택내의 모든 항목들의 개수를 반환한다.&lt;/li&gt;
+  &lt;li&gt;clear() : 스택을 공백상태로 만든다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;스택은 특히 자료의 출력순서가 입력의 역순으로 이루어져야 할 경우에 매우 긴요하게 사용된다.&lt;/p&gt;
+
+&lt;p&gt;문서나 그림, 수식 등의 편집기에서 되돌리기(undo) 기능을 구현할 때 스택이 사용된다. 되돌리기는 지금까지 실행된 
+명령어 중에서 가장 최근 것 부터 순차적으로 취소해야 하기 때문이다. 웹 브라우저의 “이전 페이지로 이동” 기능도 마찬가지이다. 가장 최근에
+본 페이지로 이동하기 위해서는 지금까지 본 페이지 정보를 스택에 저장해야 한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4.2 스택의 구현&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Stack :
+    def __init__(self):
+        self.top = []
+
+    def isEmpty(self): ## 스택이 비어있는지 확인
+        return len(self.top) == 0
+
+    def size(self): ## 스택의 크기
+        return len(self.top)
+
+    def clear(self): ## 스택을 초기화
+        self.top = []
+
+    def push(self, item): ## 스택에 항목을 넣음
+        self.top.append(item)
+
+    def pop(self): ## 스택 상단에 있는 항목 하나를 스택에서 없앤 후 가져옴
+        if not self.isEmpty():
+            return self.top.pop(-1)
+
+    def peek(self): ## 스택 상단에 있는 항목
+        if not self.isEmpty():
+            return self.top[-1]
+
+    def __str__(self):
+        return str(self.top)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;여기서 만약 append() 메소드 대신 insert() 메소드를 사용하게 된다면, 리스트의 0번 위치에 항목을 넣어야 하므로 리스트의 모든 항목들을 한 칸씩 뒤로
+밀어야 한다. 이 경우 삽입 연산의 시간 복잡도가 O(n)이 되므로 insert() 메소드는 비효율적이다.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>jang-seonguk</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="data_structure" />
+      
+
+      
+        <summary type="html">스택(Stack)</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>
