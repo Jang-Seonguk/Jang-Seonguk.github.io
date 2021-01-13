@@ -223,32 +223,32 @@ into the {body} of the default.hbs template -->
 
 <p><strong>4.2 스택의 구현</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Stack :
-    def __init__(self):
-        self.top = []
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Stack</span> <span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def isEmpty(self): ## 스택이 비어있는지 확인
-        return len(self.top) == 0
+    <span class="k">def</span> <span class="nf">isEmpty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c">## 스택이 비어있는지 확인</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
 
-    def size(self): ## 스택의 크기
-        return len(self.top)
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c">## 스택의 크기</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">)</span>
 
-    def clear(self): ## 스택을 초기화
-        self.top = []
+    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c">## 스택을 초기화</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def push(self, item): ## 스택에 항목을 넣음
-        self.top.append(item)
+    <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span> <span class="c">## 스택에 항목을 넣음</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 
-    def pop(self): ## 스택 상단에 있는 항목 하나를 스택에서 없앤 후 가져옴
-        if not self.isEmpty():
-            return self.top.pop(-1)
+    <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c">## 스택 상단에 있는 항목 하나를 스택에서 없앤 후 가져옴</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
-    def peek(self): ## 스택 상단에 있는 항목
-        if not self.isEmpty():
-            return self.top[-1]
+    <span class="k">def</span> <span class="nf">peek</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c">## 스택 상단에 있는 항목</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-    def __str__(self):
-        return str(self.top)
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>여기서 만약 append() 메소드 대신 insert() 메소드를 사용하게 된다면, 리스트의 0번 위치에 항목을 넣어야 하므로 리스트의 모든 항목들을 한 칸씩 뒤로
