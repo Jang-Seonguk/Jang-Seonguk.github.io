@@ -8,6 +8,25 @@
     
       
       <item>
+        <title>Data_Structure - Stack</title>
+        
+          <description>&lt;ol&gt;
+  &lt;li&gt;
+    &lt;h2 id=&quot;스택stack&quot;&gt;스택(Stack)&lt;/h2&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        
+        <pubDate>Thu, 14 Jan 2021 01:40:00 +0900</pubDate>
+        <link>
+        https://jang-seonguk.github.io/stack</link>
+        <guid isPermaLink="true">https://jang-seonguk.github.io/stack</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>Python 강좌(2) - Python 제어문</title>
         
           <description>&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;Python 강좌는 여러 절로 구성되어 있습니다. &lt;/span&gt;&lt;/p&gt;
@@ -41,25 +60,6 @@
         <link>
         https://jang-seonguk.github.io/python-basic</link>
         <guid isPermaLink="true">https://jang-seonguk.github.io/python-basic</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>Data_Structure - Stack</title>
-        
-          <description>&lt;ol&gt;
-  &lt;li&gt;
-    &lt;h2 id=&quot;스택stack&quot;&gt;스택(Stack)&lt;/h2&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-</description>
-        
-        <pubDate>Mon, 28 Sep 2020 01:40:00 +0900</pubDate>
-        <link>
-        https://jang-seonguk.github.io/stack</link>
-        <guid isPermaLink="true">https://jang-seonguk.github.io/stack</guid>
       </item>
       
     

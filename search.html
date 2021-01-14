@@ -181,6 +181,15 @@ into the {body} of the default.hbs template -->
 <script>
     window.store = {
     
+    "stack": {
+        "title": "Data_Structure - Stack",
+            "author": "jang-seonguk",
+            "category": "",
+            "content": "      스택(Stack)  1.1 스택이란?스택은 후입선출(Last-In First Out: LIFO)의 자료구조이다.스택의 기능에는  Stack() : 비어 있는 새로운 스택을 만든다.  isEmpty() : 스택이 비어있으면 True를 아니면 False를 반환한다.  push(e) : 항목 e를 스택의 맨 위에 추가한다.  pop() : 스택의 맨 위에 있는 항목을 꺼내 반환한다.  peek() : 스택의 맨 위에 있는 항목을 삭제하지 않고 반환한다.  size() : 스택내의 모든 항목들의 개수를 반환한다.  clear() : 스택을 공백상태로 만든다.스택은 특히 자료의 출력순서가 입력의 역순으로 이루어져야 할 경우에 매우 긴요하게 사용된다.문서나 그림, 수식 등의 편집기에서 되돌리기(undo) 기능을 구현할 때 스택이 사용된다. 되돌리기는 지금까지 실행된 명령어 중에서 가장 최근 것 부터 순차적으로 취소해야 하기 때문이다. 웹 브라우저의 “이전 페이지로 이동” 기능도 마찬가지이다. 가장 최근에본 페이지로 이동하기 위해서는 지금까지 본 페이지 정보를 스택에 저장해야 한다.4.2 스택의 구현class Stack :    def __init__(self):        self.top = []    def isEmpty(self): ## 스택이 비어있는지 확인        return len(self.top) == 0    def size(self): ## 스택의 크기        return len(self.top)    def clear(self): ## 스택을 초기화        self.top = []    def push(self, item): ## 스택에 항목을 넣음        self.top.append(item)    def pop(self): ## 스택 상단에 있는 항목 하나를 스택에서 없앤 후 가져옴        if not self.isEmpty():            return self.top.pop(-1)    def peek(self): ## 스택 상단에 있는 항목        if not self.isEmpty():            return self.top[-1]    def __str__(self):        return str(self.top)여기서 만약 append() 메소드 대신 insert() 메소드를 사용하게 된다면, 리스트의 0번 위치에 항목을 넣어야 하므로 리스트의 모든 항목들을 한 칸씩 뒤로밀어야 한다. 이 경우 삽입 연산의 시간 복잡도가 O(n)이 되므로 insert() 메소드는 비효율적이다.",
+        "url": "/stack"
+    }
+    ,
+    
     "python-control-statement": {
         "title": "Python 강좌(2) - Python 제어문",
             "author": "jang-seonguk",
@@ -196,15 +205,6 @@ into the {body} of the default.hbs template -->
             "category": "",
             "content": "Python 강좌는 여러 절로 구성되어 있습니다.     Python 강좌(1) - Python 기본    Python 강좌(2) - Python 제어문이 글은 python baisc 입니다.!!gggggfunction syntaxHighlight(code) {   var foo = 'Hello World';   var bar = 100;}",
         "url": "/python-basic"
-    }
-    ,
-    
-    "stack": {
-        "title": "Data_Structure - Stack",
-            "author": "jang-seonguk",
-            "category": "",
-            "content": "      스택(Stack)  1.1 스택이란?스택은 후입선출(Last-In First Out: LIFO)의 자료구조이다.스택의 기능에는  Stack() : 비어 있는 새로운 스택을 만든다.  isEmpty() : 스택이 비어있으면 True를 아니면 False를 반환한다.  push(e) : 항목 e를 스택의 맨 위에 추가한다.  pop() : 스택의 맨 위에 있는 항목을 꺼내 반환한다.  peek() : 스택의 맨 위에 있는 항목을 삭제하지 않고 반환한다.  size() : 스택내의 모든 항목들의 개수를 반환한다.  clear() : 스택을 공백상태로 만든다.스택은 특히 자료의 출력순서가 입력의 역순으로 이루어져야 할 경우에 매우 긴요하게 사용된다.문서나 그림, 수식 등의 편집기에서 되돌리기(undo) 기능을 구현할 때 스택이 사용된다. 되돌리기는 지금까지 실행된 명령어 중에서 가장 최근 것 부터 순차적으로 취소해야 하기 때문이다. 웹 브라우저의 “이전 페이지로 이동” 기능도 마찬가지이다. 가장 최근에본 페이지로 이동하기 위해서는 지금까지 본 페이지 정보를 스택에 저장해야 한다.4.2 스택의 구현class Stack :    def __init__(self):        self.top = []    def isEmpty(self): ## 스택이 비어있는지 확인        return len(self.top) == 0    def size(self): ## 스택의 크기        return len(self.top)    def clear(self): ## 스택을 초기화        self.top = []    def push(self, item): ## 스택에 항목을 넣음        self.top.append(item)    def pop(self): ## 스택 상단에 있는 항목 하나를 스택에서 없앤 후 가져옴        if not self.isEmpty():            return self.top.pop(-1)    def peek(self): ## 스택 상단에 있는 항목        if not self.isEmpty():            return self.top[-1]    def __str__(self):        return str(self.top)여기서 만약 append() 메소드 대신 insert() 메소드를 사용하게 된다면, 리스트의 0번 위치에 항목을 넣어야 하므로 리스트의 모든 항목들을 한 칸씩 뒤로밀어야 한다. 이 경우 삽입 연산의 시간 복잡도가 O(n)이 되므로 insert() 메소드는 비효율적이다.",
-        "url": "/stack"
     }
     ,
     
