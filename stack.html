@@ -341,6 +341,19 @@ into the {body} of the default.hbs template -->
     <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 </code></pre></div></div>
 
+<p>스택을 이용한 중위표기 수식으 후위표기 변환</p>
+
+<ul>
+  <li>입력된 중위표기 수식을 순서대로 하나씩 스캔한다.</li>
+  <li>피연산자를 만나면 바로 (후위표기 수식으로) 출력한다.</li>
+  <li>연산자는 스택에 저장한다.</li>
+  <li>현재 연산자보다 우선순위가 높은 연산자는 모두 먼저 출력한 후 현재 연산자를 스택에 넣는다.</li>
+  <li>우선순위가 같은 경우도 먼저 출력해야 한다.</li>
+  <li>입력 수식이 끝나면 스택의 남은 연산자들을 모두 pop() 해서 후위표기 수식으로 출력한다.</li>
+  <li>왼쪽 괄호는 무조건 스택에 삽입한다. 왼쪽 괄호가 일단 스택에 삽입되면 우리는 왼쪽 괄호를 제일 우선순위가 낮은 연산자로 취급한다.</li>
+  <li>오른쪽 괄호를 만나면 왼쪽 괄호가 삭제될 때까지 왼쪽 괄호위에 쌓여있는 모든 연산자들을 출력한다.</li>
+</ul>
+
 <h4 id="중위표기식의-후위-변환-알고리즘">중위표기식의 후위 변환 알고리즘</h4>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">precedence</span><span class="p">(</span><span class="n">op</span><span class="p">):</span>
@@ -383,6 +396,7 @@ into the {body} of the default.hbs template -->
 
     <span class="k">return</span> <span class="n">output</span>
 </code></pre></div></div>
+
 
                 </div>
             </section>

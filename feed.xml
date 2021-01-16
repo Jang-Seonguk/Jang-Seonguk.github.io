@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="https://jang-seonguk.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jang-seonguk.github.io/" rel="alternate" type="text/html" /><updated>2021-01-15T23:58:35+09:00</updated><id>https://jang-seonguk.github.io/</id><title type="html">IT Technical Training</title><subtitle>IT기반기술교육 블로그</subtitle><entry><title type="html">Data_Structure - Stack</title><link href="https://jang-seonguk.github.io/stack" rel="alternate" type="text/html" title="Data_Structure - Stack" /><published>2021-01-14T01:40:00+09:00</published><updated>2021-01-14T01:40:00+09:00</updated><id>https://jang-seonguk.github.io/stack</id><content type="html" xml:base="https://jang-seonguk.github.io/stack">&lt;ol&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="https://jang-seonguk.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jang-seonguk.github.io/" rel="alternate" type="text/html" /><updated>2021-01-16T23:56:48+09:00</updated><id>https://jang-seonguk.github.io/</id><title type="html">IT Technical Training</title><subtitle>IT기반기술교육 블로그</subtitle><entry><title type="html">Data_Structure - Stack</title><link href="https://jang-seonguk.github.io/stack" rel="alternate" type="text/html" title="Data_Structure - Stack" /><published>2021-01-14T01:40:00+09:00</published><updated>2021-01-14T01:40:00+09:00</updated><id>https://jang-seonguk.github.io/stack</id><content type="html" xml:base="https://jang-seonguk.github.io/stack">&lt;ol&gt;
   &lt;li&gt;
     &lt;h2 id=&quot;스택stack&quot;&gt;스택(Stack)&lt;/h2&gt;
   &lt;/li&gt;
@@ -144,6 +144,19 @@
                 &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;스택을 이용한 중위표기 수식으 후위표기 변환&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;입력된 중위표기 수식을 순서대로 하나씩 스캔한다.&lt;/li&gt;
+  &lt;li&gt;피연산자를 만나면 바로 (후위표기 수식으로) 출력한다.&lt;/li&gt;
+  &lt;li&gt;연산자는 스택에 저장한다.&lt;/li&gt;
+  &lt;li&gt;현재 연산자보다 우선순위가 높은 연산자는 모두 먼저 출력한 후 현재 연산자를 스택에 넣는다.&lt;/li&gt;
+  &lt;li&gt;우선순위가 같은 경우도 먼저 출력해야 한다.&lt;/li&gt;
+  &lt;li&gt;입력 수식이 끝나면 스택의 남은 연산자들을 모두 pop() 해서 후위표기 수식으로 출력한다.&lt;/li&gt;
+  &lt;li&gt;왼쪽 괄호는 무조건 스택에 삽입한다. 왼쪽 괄호가 일단 스택에 삽입되면 우리는 왼쪽 괄호를 제일 우선순위가 낮은 연산자로 취급한다.&lt;/li&gt;
+  &lt;li&gt;오른쪽 괄호를 만나면 왼쪽 괄호가 삭제될 때까지 왼쪽 괄호위에 쌓여있는 모든 연산자들을 출력한다.&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h4 id=&quot;중위표기식의-후위-변환-알고리즘&quot;&gt;중위표기식의 후위 변환 알고리즘&lt;/h4&gt;
 
