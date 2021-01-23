@@ -239,7 +239,7 @@ into the {body} of the default.hbs template -->
 
 <p><strong>2.2 큐의 구현</strong></p>
 
-<p>###선형큐 알고리즘-</p>
+<p>###원형큐 알고리즘-</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MAX_QSIZE</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="k">class</span> <span class="nc">CircularQueue</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -284,39 +284,50 @@ into the {body} of the default.hbs template -->
 
 </code></pre></div></div>
 
-<p>여기서 만약 append() 메소드 대신 insert() 메소드를 사용하게 된다면, 리스트의 0번 위치에 항목을 넣어야 하므로 리스트의 모든 항목들을 한 칸씩 뒤로
-밀어야 한다. 이 경우 삽입 연산의 시간 복잡도가 O(n)이 되므로 insert() 메소드는 비효율적이다.</p>
+<p><strong>2.3 큐의 응용 : 너비우선탐색(BFS, Breadth First Search)</strong></p>
 
-<p><strong>1.3 스택의 응용 : 괄호 검사</strong></p>
+<p>너비우선탐색은 출발점에서부터 인접한 위치들을 먼저 방문한 다음, 방문한 위치들에 인접한 위치들을 순서대로 찾아가는 방법이다. 이 과정은
+출구를 찾거나 모든 위치를 방문할 때까지 계속된다. 깊이우선탐색이 하나의 경로를 선택해 끝까지 가보고 막히면 다시 다른 경로를 시도하는 것과 달리,
+너비우선탐색은 가까운 위치부터 차근차근 찾아가는 전략을 사용한다. 이러한 너비우선탐색을 위해서는 큐를 사용해야 한다.</p>
 
-<p>수식 표기나 프로그래밍 언어, HTML 문서 등 다양한 분야에서 괄호와 같은 구분 문자(delimiter)들을 사용한다. 이들은 주로 간단한 데이터나 문자열들을 묶어 하나의 그룹으로 만들 때 그룹의 시작과
-끝을 나타낸다.</p>
+<h4 id="너비우선탐색-알고리즘">너비우선탐색 알고리즘</h4>
 
-<p>프로그램이 정상적으로 빌드되고 실행되려면 이들 괄호들이 같은 유형들끼리 쌍을 이루어 잘 사용되어야 하는데, 반드시 다음 조건을 맞추어 구성되어야 한다.</p>
-<ul>
-  <li>조건 1 : 왼쪽 괄호의 개수와 오른쪽 괄호의 개수가 같아야 한다.</li>
-  <li>조건 2 : 같은 타입의 괄호에서 왼쪽 괄호가 오른쪽 괄호보다 먼저 나와야 한다.</li>
-  <li>조건 3 : 서로 다른 타입의 괄호 쌍이 서로를 교차하면 안된다.</li>
-</ul>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">map</span> <span class="o">=</span> <span class="p">[[</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">],</span>
+       <span class="p">[</span><span class="s">'e'</span><span class="p">,</span><span class="s">'0'</span><span class="p">,</span><span class="s">'0'</span><span class="p">,</span><span class="s">'0'</span><span class="p">,</span><span class="s">'0'</span><span class="p">,</span><span class="s">'1'</span><span class="p">],</span>
+       <span class="p">[</span><span class="s">'1'</span><span class="p">,</span><span class="s">'0'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'0'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">],</span>
+       <span class="p">[</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'0'</span><span class="p">,</span><span class="s">'0'</span><span class="p">,</span><span class="s">'x'</span><span class="p">],</span>
+       <span class="p">[</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'0'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">],</span>
+       <span class="p">[</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">]]</span>
+<span class="n">MAZE_SIZE</span> <span class="o">=</span> <span class="mi">6</span>
 
-<h4 id="괄호검사-알고리즘">괄호검사 알고리즘</h4>
+<span class="k">def</span> <span class="nf">isValidpos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="n">MAZE_SIZE</span> <span class="ow">or</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="n">MAZE_SIZE</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">map</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="s">'0'</span> <span class="ow">or</span> <span class="nb">map</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">checkBrackets</span><span class="p">(</span><span class="n">statement</span><span class="p">):</span>
-    <span class="n">stack</span> <span class="o">=</span> <span class="n">Stack</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">statement</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">ch</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'{'</span><span class="p">,</span> <span class="s">'['</span><span class="p">,</span> <span class="s">'('</span><span class="p">):</span>
-            <span class="n">stack</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">ch</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'}'</span><span class="p">,</span> <span class="s">']'</span><span class="p">,</span> <span class="s">')'</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">stack</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
-                <span class="k">return</span> <span class="bp">False</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">left</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">ch</span> <span class="o">==</span> <span class="s">"}"</span> <span class="ow">and</span> <span class="n">left</span> <span class="o">!=</span> <span class="s">"{"</span> <span class="ow">or</span>
-                    <span class="n">ch</span> <span class="o">==</span> <span class="s">"]"</span> <span class="ow">and</span> <span class="n">left</span> <span class="o">!=</span> <span class="s">"["</span> <span class="ow">or</span>
-                    <span class="n">ch</span> <span class="o">==</span> <span class="s">")"</span> <span class="ow">and</span> <span class="n">left</span> <span class="o">!=</span> <span class="s">"("</span><span class="p">):</span>
-                    <span class="k">return</span> <span class="bp">False</span>
+<span class="k">def</span> <span class="nf">BFS</span><span class="p">():</span>
+    <span class="n">que</span> <span class="o">=</span> <span class="n">CircularQueue</span><span class="p">()</span>
+    <span class="n">que</span><span class="o">.</span><span class="n">enqueue</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"BFS : "</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">stack</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">()</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">que</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
+        <span class="n">here</span> <span class="o">=</span> <span class="n">que</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">here</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">'-&gt;'</span><span class="p">)</span>
+        <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">here</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">map</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">map</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="s">'.'</span>
+            <span class="k">if</span> <span class="n">isValidpos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">que</span><span class="o">.</span><span class="n">enqueue</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">isValidpos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">que</span><span class="o">.</span><span class="n">enqueue</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">isValidpos</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+                <span class="n">que</span><span class="o">.</span><span class="n">enqueue</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">isValidpos</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+                <span class="n">que</span><span class="o">.</span><span class="n">enqueue</span><span class="p">((</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+    <span class="k">return</span> <span class="bp">False</span>
 </code></pre></div></div>
 
 <p><strong>1.4 스택의 응용 : 수식의 계산</strong></p>
