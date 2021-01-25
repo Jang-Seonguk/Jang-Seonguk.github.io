@@ -330,172 +330,128 @@ into the {body} of the default.hbs template -->
     <span class="k">return</span> <span class="bp">False</span>
 </code></pre></div></div>
 
-<p><strong>1.4 스택의 응용 : 수식의 계산</strong></p>
+<p><strong>2.4 덱이란?</strong></p>
 
-<p>기본적으로 수식은 연산자와 피연산자를 이용해 표현하는데, 이들의 상대적인 위치에 따라 다음과 세 가지 표기법으로 구분된다.</p>
+<p>덱(deque)은 double-ended queue의 줄임말로서 큐의 전단(front)과 후단(rear)에서 모두 삽입과 삭제가 가능한 큐를 의미한다.
+그렇지만 중간에 삽입하거나 삭제하는 것은 허용하지 않는다.</p>
 
 <ul>
-  <li>전위(prefix) : 연산자 피연산자1 피연산자2
-    <ol>
-      <li>+ A B</li>
-      <li>+ 5 * A B</li>
-    </ol>
-  </li>
-  <li>중위(infix) : 피연산자1 연산자 피연산자2
-    <ol>
-      <li>A + B</li>
-      <li>5 + A * B</li>
-    </ol>
-  </li>
-  <li>후위(postfix) : 피연산자1 피연산자2 연산자
-    <ol>
-      <li>A B +</li>
-      <li>5 A B * +</li>
-    </ol>
-  </li>
+  <li>Deque() : 비어 있는 새로운 덱을 만든다.</li>
+  <li>isEmpty() : 덱이 비어있으면 True를 아니면 False를 반환한다.</li>
+  <li>addFront(x) : 항목 x를 덱의 맨 앞에 추가한다.</li>
+  <li>deleteFront() : 맨 앞의 항목을 꺼내서 반환한다.</li>
+  <li>getFront() : 맨 앞의 항목을 꺼내지 않고 반환한다.</li>
+  <li>addRear(x) : 항목 x를 덱의 맨 뒤에 추가한다.</li>
+  <li>deleteRear() : 맨 뒤의 항목을 꺼내서 반환한다.</li>
+  <li>getRear() : 맨 뒤의 항목을 꺼내지 않고 반환한다.</li>
+  <li>isFull() : 덱이 가득 차 있으면 True를 아니면 False를 반환한다.</li>
+  <li>size() : 덱의 모든 항목들의 개수를 반환한다.</li>
+  <li>clear() : 덱을 공백상태로 만든다.</li>
 </ul>
 
-<p>우리는 중위표기법에 익숙하지만 컴퓨터는 후위표기법을 선호한다. 후위표기법은 컴퓨터 입장에서 여러 가지 장점이 있는데,</p>
-<ul>
-  <li>괄호를 사용하지 않아도 계산 순서를 알 수 있다.</li>
-  <li>연산자의 우선순위를 생각할 필요가 없다. 식 자체에 우선순위가 이미 포함되어 있기 때문이다.</li>
-  <li>수식을 읽으면서 바로 계산할 수 있다. 중위 표현식은 괄호와 연산자의 우선순위 때문에 수식을 끝까지 읽은 다음에야 계산이 가능하다.</li>
-</ul>
+<h4 id="덱-알고리즘">덱 알고리즘</h4>
 
-<p>이러한 이유로 사용자가 입력한 중위표기를 후위표기로 변환한 다음 컴퓨터가 그 식을 계산해야 한다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">CircularDeque</span><span class="p">(</span><span class="n">CircularQueue</span><span class="p">):</span> <span class="c">#CircularQueue에서 상속</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
 
-<h4 id="후위표기-수식-계산-알고리즘">후위표기 수식 계산 알고리즘</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">evealPostfix</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">Stack</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">expr</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">expr</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">token</span> <span class="ow">in</span> <span class="s">"+-*/"</span><span class="p">:</span>
-                <span class="n">val2</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-                <span class="n">val1</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="s">'+'</span><span class="p">):</span>
-                    <span class="n">s</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">val1</span> <span class="o">+</span> <span class="n">val2</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="s">'-'</span><span class="p">):</span>
-                    <span class="n">s</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">val1</span> <span class="o">-</span> <span class="n">val2</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="s">'*'</span><span class="p">):</span>
-                    <span class="n">s</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">val1</span> <span class="o">*</span> <span class="n">val2</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="s">'/'</span><span class="p">):</span>
-                    <span class="n">s</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">val1</span> <span class="o">/</span> <span class="n">val2</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">s</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">addRear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">deleteFront</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">getFront</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">peek</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">addFront</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isFull</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">front</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">front</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">front</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">front</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">front</span> <span class="o">=</span> <span class="n">MAX_QSIZE</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">def</span> <span class="nf">deleteRear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rear</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rear</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rear</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rear</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rear</span> <span class="o">=</span> <span class="n">MAX_QSIZE</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">item</span>
+
+    <span class="k">def</span> <span class="nf">getRear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rear</span><span class="p">]</span>
 </code></pre></div></div>
 
-<p>스택을 이용한 중위표기 수식으 후위표기 변환</p>
+<p>구현된 덱의 시간 복잡도를 생각해 보면,</p>
 
 <ul>
-  <li>입력된 중위표기 수식을 순서대로 하나씩 스캔한다.</li>
-  <li>피연산자를 만나면 바로 (후위표기 수식으로) 출력한다.</li>
-  <li>연산자는 스택에 저장한다.</li>
-  <li>현재 연산자보다 우선순위가 높은 연산자는 모두 먼저 출력한 후 현재 연산자를 스택에 넣는다.</li>
-  <li>우선순위가 같은 경우도 먼저 출력해야 한다.</li>
-  <li>입력 수식이 끝나면 스택의 남은 연산자들을 모두 pop() 해서 후위표기 수식으로 출력한다.</li>
-  <li>왼쪽 괄호는 무조건 스택에 삽입한다. 왼쪽 괄호가 일단 스택에 삽입되면 우리는 왼쪽 괄호를 제일 우선순위가 낮은 연산자로 취급한다.</li>
-  <li>오른쪽 괄호를 만나면 왼쪽 괄호가 삭제될 때까지 왼쪽 괄호위에 쌓여있는 모든 연산자들을 출력한다.</li>
+  <li>이름만 바뀌는 연산든(addRear, deleteFront, getFront)은 이미 큐에서 모두 O(1)임을 확인하였다.</li>
+  <li>getRear는 명백히 O(1)이다.</li>
+  <li>새로 추가한 삽입연산 addFront와 삭제연산 deleteRear에서도 항목의 이동을 발생하지 않고, 인덱스만 변경하면 된다.
+따라서 시간 복잡도는 O(1)이다.</li>
 </ul>
 
-<h4 id="중위표기식의-후위-변환-알고리즘">중위표기식의 후위 변환 알고리즘</h4>
+<p><strong>2.5 우선순위 큐</strong></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">precedence</span><span class="p">(</span><span class="n">op</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="s">'('</span> <span class="ow">or</span> <span class="n">op</span> <span class="o">==</span> <span class="s">')'</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">0</span>
-    <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="s">'+'</span> <span class="ow">or</span> <span class="n">op</span> <span class="o">==</span> <span class="s">'-'</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">1</span>
-    <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="s">'*'</span> <span class="ow">or</span> <span class="n">op</span> <span class="o">==</span> <span class="s">'/'</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">2</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+<p>우선순위 큐는 우선순위의 개념을 큐에 도입한 자료구조이다. 보통의 큐는 먼저 들어온 데이터가 먼저 나가는 구조(FIFO)인데 비해,
+우선순위 큐(priority queue)는 모든 데이터가 우선순위를 가지고 있고, 들어온 순서와 상관없이 우선순위가 높은 데이터가 먼저 출력되는 구조이다.
+우선순위 큐는 시뮬레이션이나 네트워크 트래픽 제어, 운영 체제에서의 작업 스케줄링, 수치 해석적인 계산 등 다양한 분야에서 활용되고 있다.</p>
 
-<span class="k">def</span> <span class="nf">Infix2Postfix</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">Stack</span><span class="p">()</span>
-    <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">expr</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">term</span> <span class="ow">in</span> <span class="s">'('</span><span class="p">:</span>
-            <span class="n">s</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="s">'('</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">term</span> <span class="ow">in</span> <span class="s">')'</span><span class="p">:</span>
-            <span class="k">while</span> <span class="ow">not</span> <span class="n">s</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
-                <span class="n">op</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-                <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="s">'('</span><span class="p">:</span>
-                    <span class="k">break</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">term</span> <span class="ow">in</span> <span class="s">"+-*/"</span><span class="p">:</span>
-            <span class="k">while</span> <span class="ow">not</span> <span class="n">s</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
-                <span class="n">op</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">peek</span><span class="p">()</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">precedence</span><span class="p">(</span><span class="n">term</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">precedence</span><span class="p">(</span><span class="n">op</span><span class="p">)):</span>
-                    <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
-                    <span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">break</span>
-            <span class="n">s</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
-
-    <span class="k">while</span> <span class="ow">not</span> <span class="n">s</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
-        <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
-
-    <span class="k">return</span> <span class="n">output</span>
-</code></pre></div></div>
-
-<p><strong>1.5 스택의 응용 : 미로 탐색</strong></p>
-
-<p>가장 간단한 탐색 방법은 시행착오를 이용하는 것으로 하나의 경로를 선택하여 시도해 보고 막히면 다시 다른 경로를 시도하는 것이다. 이때 현재의 경로가 막혔을 때
-다시 선택할 수 있는 다른 경로들을 어딘가에 저장해야 한다. 즉 가던 길이 막히면 가장 최근에 있었던 갈림길로 되돌아가서 다른 곳을 찾는것이다. 이러한 방법을
-깊이 우선 탐색(DFS, Depth First Search)이라고 한다.</p>
-
-<p>탐색 알고리즘</p>
 <ul>
-  <li>Step1 : 시작위치를 스택에 넣는다. 현재 스택에는 시작위치만 들어 있다.</li>
-  <li>Step2 : 스택이 공백이 아니면 하나의 위치를 꺼낸다. 이것이 현재 위치이다. 현재 위치에 “방문했음” 표시를 한다.
-만약 스택이 공백이라면 이 미로에는 출구가 없는 것이므로 종료한다.</li>
-  <li>Step3 : 만약 현재위치가 출구이면 탐색은 성공으로 끝난다.</li>
-  <li>Step4 : 그렇지 않으면 이웃(상하좌우)방들을 살펴본다. 만약 이웃 방들이 아직 방문되지 않았고 갈 수 있는 방이라면
-그 방의 위치를 모두 스택에 삽입한다. 다시 Step2로 돌아간다.</li>
+  <li>PriorityQueue() : 비어 있는 우선순위 큐를 만든다.</li>
+  <li>isEmpty() : 우선순위 큐가 공백상태인지를 검사한다.</li>
+  <li>enqueue(e) : 우선순위를 가진 항목 e를 검사한다.</li>
+  <li>dequeue() : 가장 우선순위가 높은 항목을 꺼내서 반환한다.</li>
+  <li>peek() : 가장 우선순위가 높은 요소를 삭제하지 않고 반환한다.</li>
+  <li>size() : 우선순위 큐의 모든 항목들의 개수를 반환한다.</li>
+  <li>clear() : 우선순위 큐를 공백상태로 만든다.</li>
 </ul>
 
 <h4 id="스택을-이용한-탐색-알고리즘">스택을 이용한 탐색 알고리즘</h4>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">map</span> <span class="o">=</span> <span class="p">[[</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">],</span>
-       <span class="p">[</span><span class="s">'e'</span><span class="p">,</span><span class="s">'0'</span><span class="p">,</span><span class="s">'0'</span><span class="p">,</span><span class="s">'0'</span><span class="p">,</span><span class="s">'0'</span><span class="p">,</span><span class="s">'1'</span><span class="p">],</span>
-       <span class="p">[</span><span class="s">'1'</span><span class="p">,</span><span class="s">'0'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'0'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">],</span>
-       <span class="p">[</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'0'</span><span class="p">,</span><span class="s">'0'</span><span class="p">,</span><span class="s">'x'</span><span class="p">],</span>
-       <span class="p">[</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'0'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">],</span>
-       <span class="p">[</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">,</span><span class="s">'1'</span><span class="p">]]</span>
-<span class="n">MAZE_SIZE</span> <span class="o">=</span> <span class="mi">6</span>
-<span class="k">def</span> <span class="nf">isValidpos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="n">MAZE_SIZE</span> <span class="ow">or</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="n">MAZE_SIZE</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">False</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">map</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="s">'0'</span> <span class="ow">or</span> <span class="nb">map</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PriorityQueue</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="k">def</span> <span class="nf">DFS</span><span class="p">():</span>
-    <span class="n">stack</span> <span class="o">=</span> <span class="n">Stack</span><span class="p">()</span>
-    <span class="n">stack</span><span class="o">.</span><span class="n">push</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'DFS: '</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">isEmpty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
 
-    <span class="k">while</span> <span class="ow">not</span> <span class="n">stack</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
-        <span class="n">here</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">here</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s">'-&gt;'</span><span class="p">)</span>
-        <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">here</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nb">map</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="s">'x'</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">enqueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">findMaxIndex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">None</span>
+
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">map</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="s">'.'</span>
+            <span class="n">highest</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">()):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">highest</span><span class="p">]:</span>
+                    <span class="n">highest</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="k">return</span> <span class="n">highest</span>
 
-            <span class="k">if</span> <span class="n">isValidpos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-                <span class="n">stack</span><span class="o">.</span><span class="n">push</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-            <span class="k">if</span> <span class="n">isValidpos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-                <span class="n">stack</span><span class="o">.</span><span class="n">push</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
-            <span class="k">if</span> <span class="n">isValidpos</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-                <span class="n">stack</span><span class="o">.</span><span class="n">push</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
-            <span class="k">if</span> <span class="n">isValidpos</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-                <span class="n">stack</span><span class="o">.</span><span class="n">push</span><span class="p">((</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">' 현재 스택 : '</span><span class="p">,</span> <span class="n">stack</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">def</span> <span class="nf">dequeue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">highest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">findMaxIndex</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">highest</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">highest</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">peek</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">highest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">findMaxIndex</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">highest</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">highest</span><span class="p">]</span>
 </code></pre></div></div>
+
+<ul>
+  <li>삽입 연산은 리스트의 append() 메소드를 이용하는데, 이 연산의 시간 복잡도가 대부분의 경우 O(1)이므로 enqueue()도 O(1)이라 볼 수 있다.</li>
+  <li>삭제와 peek 연산에서는 리스트에서 최대 우선순위 항목의 인덱스를 찾기 위해 findMaxIndex()를 호출하였다. 이 연산은 당연히 우선순위 큐의 모든 항목의
+우선순위를 비교해야 한다. 따라서 시간 복잡도는 O(n)이다. 따라서 이 함수는 호출하는 dequeue()와 peek()의 시간 복잡도도 O(n)이다. dequeue()에서는 삭제하는 위치
+이후의 모든 항목들을 앞으로 이동하는 작업이 추가로 필요하고, 이 연산도 O(n)이다. 결국 삭제 연산의 시간 복잡도는 O(n)이다.</li>
+</ul>
 
                 </div>
             </section>
