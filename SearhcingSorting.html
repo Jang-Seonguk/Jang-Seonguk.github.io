@@ -346,8 +346,63 @@ into the {body} of the default.hbs template -->
 
 <p>정렬을 사용하면 삽입이 약간 번거롭기는 하지만 집합의 여러 연산들을 훨씬 효율적으로 처리할 수 있다.</p>
 
-<p><strong>4.4 탐색과 맵 구조</strong></p>
+<p><strong>4.4 간단한 탐색 알고리즘</strong></p>
 
+<p>탐색은 레코드(record)의 집합에서 원하는 레코드를 찾는 작업이다. 보통 이러한 레코드들의 집합을 테이블(table)이라고 부른다. 레코드들은 서로를 구별하여 인식할 수 있는 
+키(key)를 가지고 있는데, 이것을 탐색키(search key)라고 한다. 결국 탐색은 테이블에서 원하는 탐색키를 가진 레코드를 찾는 작업이다.</p>
+
+<p>####순차 탐색(sequential search) 알고리즘</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">sequential_search</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="bp">None</span>
+</code></pre></div></div>
+
+<p>####이진 탐색(binary search) 알고리즘</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">binary_search</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">low</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="p">):</span>
+        <span class="n">middle</span> <span class="o">=</span> <span class="p">(</span><span class="n">low</span><span class="o">+</span><span class="n">high</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">A</span><span class="p">[</span><span class="n">middle</span><span class="p">]</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">middle</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">[</span><span class="n">middle</span><span class="p">]</span><span class="o">.</span><span class="n">key</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">binary_search</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">middle</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">binary_search</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">middle</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">None</span>
+</code></pre></div></div>
+
+<p>####이진 탐색 반복 구조 알고리즘</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">binary_search_iter</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">low</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="p">):</span>
+        <span class="n">middle</span> <span class="o">=</span> <span class="p">(</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">A</span><span class="p">[</span><span class="n">middle</span><span class="p">]</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">middle</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">key</span> <span class="o">&gt;</span> <span class="n">A</span><span class="p">[</span><span class="n">middle</span><span class="p">]</span><span class="o">.</span><span class="n">key</span><span class="p">):</span>
+            <span class="n">low</span> <span class="o">=</span> <span class="n">middle</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">high</span> <span class="o">=</span> <span class="n">middle</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="bp">None</span>
+</code></pre></div></div>
+
+<p>####보간 탐색 (interpolation search)</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">binary_search</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">low</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="p">):</span>
+        <span class="n">middle</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">low</span> <span class="o">+</span> <span class="p">(</span><span class="n">high</span><span class="o">-</span><span class="n">low</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">key</span><span class="o">-</span><span class="n">A</span><span class="p">[</span><span class="n">low</span><span class="p">]</span><span class="o">.</span><span class="n">key</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">high</span><span class="p">]</span><span class="o">.</span><span class="n">key</span> <span class="o">-</span> <span class="n">A</span><span class="p">[</span><span class="n">low</span><span class="p">]</span><span class="o">.</span><span class="n">key</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">A</span><span class="p">[</span><span class="n">middle</span><span class="p">]</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">middle</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">A</span><span class="p">[</span><span class="n">middle</span><span class="p">]</span><span class="o">.</span><span class="n">key</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">binary_search</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">middle</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">binary_search</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">middle</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">None</span>
+</code></pre></div></div>
+
+<p><strong>4.5 고급 탐색 구조 : 해싱</strong></p>
+
+<p>해싱은 킷값에 산술적인 연산을 적용하여 레코드가 저장되어야 할 위치를 직접 계산하는 방법이다. 따라서 탐색은 테이블에 있는 레코드를 하나씩 비교하는 것이 아니라
+탐색키로부터 레코드가 있어야 할 위치를 계산하고, 그 위치에 레코드가 있는지를 확인만 하면 된다. 해싱에서 킷값으로부터 레코드가 저장될 위치를 계산하는 함수를
+해시 함수(hash function)라 한다. 또한 해시 함수에 의해 계산된 위치에 레코드를 저장한 테이블을 해시 테이블(hash table)이라 한다.</p>
 
                 </div>
             </section>
