@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="https://jang-seonguk.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jang-seonguk.github.io/" rel="alternate" type="text/html" /><updated>2021-02-12T22:51:15+09:00</updated><id>https://jang-seonguk.github.io/</id><title type="html">IT Technical Training</title><subtitle>IT기반기술교육 블로그</subtitle><entry><title type="html">Data_Structure - Searching &amp;amp; Sorting</title><link href="https://jang-seonguk.github.io/SearhcingSorting" rel="alternate" type="text/html" title="Data_Structure - Searching &amp; Sorting" /><published>2021-01-14T01:40:00+09:00</published><updated>2021-01-14T01:40:00+09:00</updated><id>https://jang-seonguk.github.io/SearhcingSorting</id><content type="html" xml:base="https://jang-seonguk.github.io/SearhcingSorting">&lt;ol&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="https://jang-seonguk.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jang-seonguk.github.io/" rel="alternate" type="text/html" /><updated>2021-02-14T23:56:39+09:00</updated><id>https://jang-seonguk.github.io/</id><title type="html">IT Technical Training</title><subtitle>IT기반기술교육 블로그</subtitle><entry><title type="html">Data_Structure - Searching &amp;amp; Sorting</title><link href="https://jang-seonguk.github.io/SearhcingSorting" rel="alternate" type="text/html" title="Data_Structure - Searching &amp; Sorting" /><published>2021-01-14T01:40:00+09:00</published><updated>2021-01-14T01:40:00+09:00</updated><id>https://jang-seonguk.github.io/SearhcingSorting</id><content type="html" xml:base="https://jang-seonguk.github.io/SearhcingSorting">&lt;ol&gt;
   &lt;li&gt;
     &lt;h2 id=&quot;정렬과-탐색searching--sorting&quot;&gt;정렬과 탐색(Searching &amp;amp; Sorting)&lt;/h2&gt;
   &lt;/li&gt;
@@ -267,7 +267,82 @@
 이동 폴딩은 탐색키를 여러 부분으로 나눈 값들을 더하고, 경계 폴딩은 이웃한 부분을 거꾸로 더해 해시 주소를 얻는다.&lt;/p&gt;
 
 &lt;p&gt;####중간 제곱 함수
-탐색키를 제곱한 다음, 중간의 몇 비트를&lt;/p&gt;</content><author><name>jang-seonguk</name></author><category term="datastructure" /><summary type="html">정렬과 탐색(Searching &amp;amp; Sorting)</summary></entry><entry><title type="html">Data_Structure - Queue</title><link href="https://jang-seonguk.github.io/LinkedList" rel="alternate" type="text/html" title="Data_Structure - Queue" /><published>2021-01-14T01:40:00+09:00</published><updated>2021-01-14T01:40:00+09:00</updated><id>https://jang-seonguk.github.io/LinkedList</id><content type="html" xml:base="https://jang-seonguk.github.io/LinkedList">&lt;ol&gt;
+탐색키를 제곱한 다음, 중간의 몇 비트를 취해서 해시 주소를 생성하는 방법이다. 제곱한 값의 중간 비트들은 대개 탐색키의 모든 자리의 숫자들과 관련이 있다. 따라서 두 킷값에서
+몇 개의 자리가 같더라도 서로 다른 해싱 주소를 갖게 된다. 탐색키를 제곱한 값의 중간 비트들은 보통 비교적 고르게 분산된다.&lt;/p&gt;
+
+&lt;p&gt;####비트 추출 방법
+해시 테이블의 크기가 M=2²일 때 탐색키를 이진수로 간주하여 임의의 위치의 k개의 비트를 해시 주소로 사용하는 것이다. 이 방법은 간단하지만 탐색키의 일부 정보만을 사용하므로 해시
+주소의 집중 현상이 일어날 가능성이 많다.&lt;/p&gt;
+
+&lt;p&gt;####숫자 분석 방법
+이 방법은 숫자로 구성된 키에서 각 위치마다 수의 특징을 미리 알고 있을 때 유용한다. 키의 각 위치에 있는 숫자 중에서 편증되지 않는 수들을 해시 테이블의 크기에 적합한만큼
+조합하여 해시 주소로 사용하는 방법이다. 예를 들면, 학생의 학번이 201912345와 같이 부여되면 입학년도를 의미하는 앞의 4 자릿수는 편중되므로 사용하지 않고 나머지 자리의 수들을
+조합하여 해시 주소로 사용한다.&lt;/p&gt;
+
+&lt;p&gt;####탐색키가 문자열인 경우
+탐색키가 문자열인 경우는 보통 각 문자에 정수를 대응시켜 바꾸게 한다. 예를 들면 ‘a’부터 ‘z’에 1부터 26을 할당할 수도 있고, 각 문자의 아스키 코드나 유니코드 값을 그대로
+이용할 수 있다. 가능하면 문자열안의 모든 문자를 골고루 사용하는 것이 좋을 것이다.&lt;/p&gt;
+
+&lt;p&gt;####탐색 방법들의 성능 비교
+해싱의 시간 복잡도는 O(1)이다. 그러나 이것은 충돌이 전혀 일어나지 않는 상황에서만 가능하다. 따라서 실제 해싱의 탐색 연산은 O(1)보다는 느리다. 해싱의 성능을 분석하기 
+위해 해시 테이블이 얼마나 채워져 있는지를 나타내는 적재 밀도(loading density) 또는 적재 비율(loading factor)을 다음과 같이 정의한다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;a = 저장된 항목의 개수 / 해싱테이블의 버킷의 개수 = n/M&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;a가 0이면 해시 테이블은 비어있다. a의 최댓값은 충돌 해결 방법에 따라 달라진다. 선형 조사법에서는 테이블이 가득차면 모든 버킷에 하나의 항목이 저장되므로 1이 된다.
+체인법에서는 저장할 수 있는 항목의 수가 해시 테이블의 크기를 넘어설 수 있기 때문에 a는 최대값을 가지지 않는다.
+가장 단순한 순차 탐색은 탐색 시간이 가장 많이 걸린다. 테이블의 정렬이 필요한 이진 탐색은 효율적이지만 레코드의 삽입과 삭제에 대한 처리가 복잡하다.
+이상적인 경우 해싱이 가장 효율적인 방법이다. 물론 단점도 있다. 해싱은 그야말로 순서가 없다. 따라서 정렬된 배열이나 이진탐색트리와 같이 어떤 항목의 이전 항목이나 다음 항목을
+쉽게 찾을 수 없다. 또한 해시 테이블의 크기를 결정하는 것이 불명확하다. 최악의 경우, 즉 모든 키가 하나의 버킷으로 집중되면 시간 복잡도는 O(n)이 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4.6 맵의 응용 : 나의 단어장&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;맵을 구현할 수 있는 방법은 여러 가지가 있다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;리스트를 이용해 순차탐색 맵을 구현하는 방법&lt;/li&gt;
+  &lt;li&gt;리스트를 정렬해서 이진탐색 맵을 구현하는 방법&lt;/li&gt;
+  &lt;li&gt;선형조사법으로 해시 맵을 구현하는 방법&lt;/li&gt;
+  &lt;li&gt;체이닝으로 해시 맵을 구현하는 방법&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;####리스트를 이용한 순차탐색 맵 알고리즘&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__str__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s:&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SequentialMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;table&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;entry&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;insert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;pos&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sequential_search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pos&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;delete&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()):&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>jang-seonguk</name></author><category term="datastructure" /><summary type="html">정렬과 탐색(Searching &amp;amp; Sorting)</summary></entry><entry><title type="html">Data_Structure - Queue</title><link href="https://jang-seonguk.github.io/LinkedList" rel="alternate" type="text/html" title="Data_Structure - Queue" /><published>2021-01-14T01:40:00+09:00</published><updated>2021-01-14T01:40:00+09:00</updated><id>https://jang-seonguk.github.io/LinkedList</id><content type="html" xml:base="https://jang-seonguk.github.io/LinkedList">&lt;ol&gt;
   &lt;li&gt;
     &lt;h2 id=&quot;연결-리스트linked-list&quot;&gt;연결 리스트(Linked List)&lt;/h2&gt;
   &lt;/li&gt;
